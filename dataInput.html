@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>제품 정보 입력</title>
+  <style>
+    /* 기본적인 스타일 설정 */
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    .header-buttons {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .navigate-button {
+      background-color: #58404E;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .navigate-button:hover {
+      background-color: #762052;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    input, button, select {
+      width: 100%;
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background-color: #58404E;
+      color: white;
+      border: none;
+      cursor: pointer;
+      flex: 1;
+      margin: 0 5px;
+    }
+
+    button:hover {
+      background-color: #762052;
+    }
+
+    .error {
+      color: red;
+      font-size: 12px;
+      margin-top: -8px;
+      margin-bottom: 10px;
+    }
+
+    #customNotificationContainer {
+      display: none;
+    }
+
+    .upload-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 80px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+      position: relative;
+      cursor: pointer;
+    }
+    
+    .upload-text {
+      font-size: 14px;
+      color: #555;
+      flex: 1;
+      padding-left: 10px;
+    }
+
+    .image-preview-container {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 10px;
+    }
+
+    .image-preview-container img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 4px;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    #customAlert {
+      display: none;
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <!-- 제품 목록 이동 버튼 -->
+  <div class="header-buttons">
+    <a href="dataList.html">
+      <button class="navigate-button">List</button>
+    </a>
+  </div>
+
+  <!-- 제품 정보를 입력하는 폼 -->
+  <form id="productForm">
+    <h2>제품 정보 입력</h2>
+
+    <!-- 제품명 입력 필드 -->
+    <input type="text" id="productName" name="productName" placeholder="제품명">
+    <div id="productNameError" class="error"></div>
+
+    <!-- 제조사 입력 필드 -->
+    <input type="text" id="brand" name="brand" placeholder="제조사">
+    <div id="brandError" class="error"></div>
+
+    <!-- 모델명 입력 필드 -->
+    <input type="text" id="modelName" name="modelName" placeholder="모델명">
+    <div id="modelNameError" class="error"></div>
+
+    <!-- 시리얼 번호 입력 필드 -->
+    <input type="text" id="serialNumber" name="serialNumber" placeholder="시리얼 번호">
+    <div id="serialNumberError" class="error"></div>
+
+    <!-- 구매일 입력 필드 -->
+    <label for="purchaseDate">구매일</label>
+    <input type="date" id="purchaseDate" name="purchaseDate">
+    <div id="purchaseDateError" class="error"></div>
+    
+    <!-- 만료일 입력 필드 -->
+    <label for="expiryDate">만료일</label>
+    <input type="date" id="expiryDate" name="expiryDate">
+    <div id="expiryDateError" class="error"></div>
+
+    <!-- 알림 설정 선택박스 -->
+    <label for="notificationTime">알림 설정</label>
+    <select id="notificationTime" name="notificationTime">
+      <option value="1month">만료일 1달 전</option>
+      <option value="1week">만료일 1주일 전</option>
+      <option value="1day">만료일 1일 전</option>
+      <option value="custom">사용자 지정</option>
+      <option value="none">알림 없음</option>
+    </select>
+
+    <!-- 사용자 지정 알림 설정 (초기에는 숨겨져 있음) -->
+    <div id="customNotificationContainer">
+      <label for="customNotificationDays">며칠 전에 알림을 받을지 설정</label>
+      <input type="number" id="customNotificationDays" name="customNotificationDays" min="1" placeholder="일수 입력">
+      <div id="customNotificationDaysError" class="error"></div>
+    </div>
+
+    <!-- 영수증 및 보증서 업로드 필드 -->
+     <div class="upload-container" id="receiptImageContainer">
+      <div class="image-preview-container">
+        <img id="receiptImagePreview" src="" alt="미리보기 이미지" style="display:none;">
+      </div>
+      <span class="upload-text" id="receiptImageUploadText">영수증 및 보증서 업로드</span>
+      <input type="file" id="receiptImageInput" name="receiptImage" accept="image/*">
+    </div>
+    
+    <!-- 제품 사진 업로드 필드 -->
+    <div class="upload-container" id="productImageContainer">
+      <div class="image-preview-container">
+          <img id="productImagePreview" src="" alt="미리보기 이미지" style="display:none;">
+      </div>
+      <span class="upload-text" id="productImageUploadText">제품 이미지 업로드</span>
+      <input type="file" id="productImageInput" name="productImage" accept="image/*">
+    </div>
+
+    <!-- 버튼 컨테이너 -->
+    <div class="button-container">
+      <!-- 저장 버튼 -->
+      <button type="submit">저장</button>
+      <!-- 취소 버튼 -->
+      <button type="button" id="cancelButton">취소</button>
+    </div>
+  </form>
+
+  <!-- 저장 완료 후 표시되는 알림창 -->
+   <div id="customAlert">저장되었습니다</div>
+
+  <!-- Firebase SDK 로드 -->
+  <script defer src="/__/firebase/10.14.1/firebase-app-compat.js"></script>
+  <script defer src="/__/firebase/10.14.1/firebase-auth-compat.js"></script>
+  <script defer src="/__/firebase/10.14.1/firebase-firestore-compat.js"></script>
+  <script defer src="/__/firebase/10.14.1/firebase-storage-compat.js"></script>
+  <script type="module">
+
+    // Firebase 초기화 및 Firestore와 Storage 연동
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-analytics.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-storage.js";
+
+    // Toast Message 연동
+    import { scheduleNotification, checkNotifications } from './js/toast_message.js';
+
+    // Firebase 프로젝트 설정 정보
+    const firebaseConfig = {
+      apiKey: "AIzaSyBjMwpkT6ErP_kutnyMO025WRzYexE6oSo",
+      authDomain: "convergencesoftwareproject1.firebaseapp.com",
+      databaseURL: "https://convergencesoftwareproject1-default-rtdb.firebaseio.com",
+      projectId: "convergencesoftwareproject1",
+      storageBucket: "convergencesoftwareproject1.appspot.com",
+      messagingSenderId: "95772010681",
+      appId: "1:95772010681:web:e8c8966e4d388486449368",
+      measurementId: "G-WMXWPPVBGW"
+    };
+
+    const app = initializeApp(firebaseConfig); // Firebase 앱 초기화
+    const analytics = getAnalytics(app); // Firebase Analytics 사용
+    const db = getFirestore(app); // Firestore 초기화
+    const storage = getStorage(app); // Storage 초기화
+
+    // 파일을 Firebase Storage에 업로드하고 다운로드 URL을 반환하는 함수
+    async function uploadFiles(file, folder) {
+      const storageRef = ref(storage, `${folder}/${file.name}`); // Storage 경로 설정
+      await uploadBytes(storageRef, file); // 파일 업로드
+      const downloadURL = await getDownloadURL(storageRef); // 업로드 후 다운로드 URL 가져오기
+      return downloadURL; // 파일의 URL 반환
+    }
+
+    // 페이지 로드 시 알림 확인
+    document.addEventListener('DOMContentLoaded', checkNotifications);
+
+    // 폼 제출 이벤트 처리
+    document.getElementById('productForm').addEventListener('submit', async function(event) {
+      event.preventDefault(); // 기본 폼 제출 동작 방지
+        
+      // 기존 에러 메시지 초기화
+      document.getElementById('brandError').textContent = '';
+      document.getElementById('productNameError').textContent = '';
+      document.getElementById('modelNameError').textContent = '';
+      document.getElementById('serialNumberError').textContent = '';
+      document.getElementById('purchaseDateError').textContent = '';
+      document.getElementById('expiryDateError').textContent = '';
+      document.getElementById('customNotificationDaysError').textContent = '';
+      
+        
+      // 폼 입력 값 가져오기
+      const brand = document.getElementById('brand').value.trim();
+      const productName = document.getElementById('productName').value.trim();
+      const modelName = document.getElementById('modelName').value.trim();
+      const serialNumber = document.getElementById('serialNumber').value.trim();
+      const purchaseDate = document.getElementById('purchaseDate').value;
+      const expiryDate = document.getElementById('expiryDate').value;
+      const notificationTime = document.getElementById('notificationTime').value;
+      const customNotificationDays = document.getElementById('customNotificationDays').value;
+        
+      // 알림 예약 설정
+      if (expiryDate && notificationTime !== 'none') {
+        scheduleNotification(expiryDate, notificationTime, customNotificationDays, productName);
+      }
+      
+      // 입력 유효성 검사
+      let hasError = false;
+      if (productName === '') {
+        document.getElementById('productNameError').textContent = '제품명을 입력하세요.';
+        hasError = true;
+      }
+      if (brand === '') {
+        document.getElementById('brandError').textContent = '제조사를 입력하세요.';
+        hasError = true;
+      }
+      if (modelName === '') {
+        document.getElementById('modelNameError').textContent = '모델명을 입력하세요.';
+        hasError = true;
+      }
+      if (serialNumber === '') {
+        document.getElementById('serialNumberError').textContent = '시리얼 번호를 입력하세요.';
+        hasError = true;
+      }
+      if (purchaseDate === '') {
+        document.getElementById('purchaseDateError').textContent = '구매일을 입력하세요.';
+        hasError = true;
+      }
+      if (expiryDate === '') {
+        document.getElementById('expiryDateError').textContent = '만료일을 입력하세요.';
+        hasError = true;
+      }
+      if (notificationTime === 'custom' && customNotificationDays === '') {
+        document.getElementById('customNotificationDaysError').textContent = '알림 일수를 입력하세요.';
+        hasError = true;
+      }
+
+      if (!hasError) {
+        // 파일 가져오기
+        const receiptFile = document.getElementById('receiptImageInput').files[0]; // 영수증 파일
+        const productImageFile = document.getElementById('productImageInput').files[0]; // 제품 사진 파일
+        
+        let receiptImageUrl = '';   
+        let productImageUrl = '';
+        
+        // 영수증 및 보증서 이미지 파일이 있으면 업로드 및 URL 가져오기
+        if (receiptFile) {
+          receiptImageUrl = await uploadFiles(receiptFile, 'receipt_images'); // 'receipt_images' 폴더에 업로드
+        }
+        
+        // 제품 이미지 파일이 있으면 업로드 및 URL 가져오기
+        if (productImageFile) {
+          productImageUrl = await uploadFiles(productImageFile, 'product_images'); // 'product_images' 폴더에 업로드
+        }
+        
+        // Firestore에 데이터 저장
+        await addDoc(collection(db, "products"), {
+          productName: productName,
+          brand: brand,
+          modelName: modelName,
+          serialNumber: serialNumber,
+          purchaseDate: purchaseDate,
+          expiryDate: expiryDate,
+          notificationTime: notificationTime,
+          customNotificationDays: customNotificationDays,
+          receiptImageUrls: [receiptImageUrl], // 영수증 및 보증서 파일 URL
+          productImageUrl: productImageUrl // 제품 사진 URL
+        });
+
+        // 폼 제출 후 초기화    
+        document.getElementById('productForm').reset(); // 폼 초기화       
+        document.getElementById('productImagePreview').style.display = 'none'; // 제품 사진 미리보기 초기화
+        document.getElementById('receiptImagePreview').style.display = 'none'; // 영수증 미리보기 초기화
+        document.getElementById('productImageUploadText').style.display = 'block'; // 업로드 텍스트 보이기
+        document.getElementById('receiptImageUploadText').style.display = 'block'; // 업로드 텍스트 보이기
+            
+        // 저장 완료 알림 표시
+        document.getElementById('customAlert').style.display = 'block';
+        setTimeout(() => {
+          document.getElementById('customAlert').style.display = 'none';
+        }, 3000); // 3초 후에 알림 숨김
+      }
+    });
+
+    // 알림 설정에 따른 사용자 지정 알림 설정 표시/숨김
+    document.getElementById('notificationTime').addEventListener('change', function() {
+      const customContainer = document.getElementById('customNotificationContainer');
+      customContainer.style.display = this.value === 'custom' ? 'block' : 'none'; // 'custom' 선택 시 보여주기
+    });
+
+    // 영수증 파일 선택 시 미리보기
+    document.getElementById('receiptImageContainer').addEventListener('click', function() {
+      document.getElementById('receiptImageInput').click(); // 파일 탐색기 열기
+    });
+    
+    document.getElementById('receiptImageInput').addEventListener('change', function(event) {
+      const files = event.target.files;
+      if (files.length > 0) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const receiptImagePreview = document.getElementById('receiptImagePreview');
+          if (receiptImagePreview) {
+            receiptImagePreview.src = e.target.result;
+            receiptImagePreview.style.display = 'block'; // 미리보기 이미지 표시
+            document.getElementById('receiptImageUploadText').style.display = 'block'; // 텍스트는 그대로 표시
+          } else {
+            console.error("영수증 미리보기 요소를 찾을 수 없습니다.");
+            }
+        };
+        reader.readAsDataURL(files[0]); // 첫 번째 파일을 읽어서 미리보기 표시
+      }
+    });
+    
+    // 제품 사진 파일 선택 시 미리보기
+    document.getElementById('productImageContainer').addEventListener('click', function() {
+    document.getElementById('productImageInput').click(); // 파일 탐색기 열기
+    });
+    
+    document.getElementById('productImageInput').addEventListener('change', function(event) {
+      const files = event.target.files;
+      if (files.length > 0) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const productImagePreview = document.getElementById('productImagePreview');
+            if (productImagePreview) {
+                productImagePreview.src = e.target.result;
+                productImagePreview.style.display = 'block'; // 미리보기 이미지 표시
+                document.getElementById('productImageUploadText').style.display = 'block'; // 텍스트는 그대로 표시
+            } else {
+                console.error("제품 미리보기 요소를 찾을 수 없습니다.");
+            }
+        };
+        reader.readAsDataURL(files[0]); // 첫 번째 파일을 읽어서 미리보기 표시
+      }
+    });
+
+    // 취소 버튼 클릭 시 동작
+    document.getElementById("cancelButton").addEventListener("click", function() {
+      // 모든 입력 필드 초기화
+      document.getElementById("productForm").reset();
+      document.getElementById("imagePreview").style.display = "none"; // 미리보기 숨김
+      document.getElementById("uploadText").style.display = "block"; // 텍스트 보이기
+    });
+  </script>
+</body>
+</html>
