@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Warranty Notification</title>
+  <style>
+    .toast {
+      visibility: hidden;
+      min-width: 300px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 5px;
+      padding: 10px;
+      position: fixed;
+      z-index: 1;
+      right: 20px;
+      bottom: 30px;
+      font-size: 16px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .toast.show {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="toast" class="toast">고객님, OOO제품의 보증기간이<br>30일 남았습니다!</div>
+
+  <script>
+    function showToast() {
+      const toast = document.getElementById('toast');
+      toast.className = 'toast show';
+      setTimeout(() => {
+        toast.className = 'toast';
+      }, 3000);
+    }
+
+    window.onload = function () {
+      showToast();
+      setTimeout(() => {
+        showToast();
+      }, 600000);
+    };
+  </script>
+</body>
+</html>
