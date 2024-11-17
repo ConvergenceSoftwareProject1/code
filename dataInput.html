@@ -238,17 +238,18 @@
    <div id="customAlert">저장되었습니다</div>
 
   <!-- Firebase SDK 로드 -->
-  <script defer src="/__/firebase/10.14.1/firebase-app-compat.js"></script>
-  <script defer src="/__/firebase/10.14.1/firebase-auth-compat.js"></script>
-  <script defer src="/__/firebase/10.14.1/firebase-firestore-compat.js"></script>
-  <script defer src="/__/firebase/10.14.1/firebase-storage-compat.js"></script>
+  <script defer src="/__/firebase/11.0.2/firebase-app-compat.js"></script>
+  <script defer src="/__/firebase/11.0.2/firebase-auth-compat.js"></script>
+  <script defer src="/__/firebase/11.0.2/firebase-firestore-compat.js"></script>
+  <script defer src="/__/firebase/11.0.2/firebase-storage-compat.js"></script>
   <script type="module">
+    
 
     // Firebase 초기화 및 Firestore와 Storage 연동
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-analytics.js";
-    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-storage.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-analytics.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-storage.js";
 
     // Toast Message 연동
     import { scheduleNotification, checkNotifications } from './js/toast_message.js';
