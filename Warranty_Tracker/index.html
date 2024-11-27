@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="ko"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Warranty Tracker - Login</title>
+  <link rel="stylesheet" href="./css/login_styles.css"></head><body>
+
+  <!-- Top Navigation Bar -->
+  <nav class="top-nav">
+    <div class="nav-logo">
+      <a href="index.html">Warranty Tracker</a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="register.html">회원가입</a></li>
+      <li><a href="index.html">로그인</a></li>
+    </ul>
+  </nav>
+
+  <div class="login-container">
+    <h1>Welcome to Warranty Tracker</h1>
+    <p>당신의 삶이 조금 더 편리해지도록 노력합니다. Warranty Tracker에 오신 것을 환영합니다.</p>
+    <form id="loginForm">
+      <input type="text" id="email" placeholder="email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <div class="remember-me">
+        <input type="checkbox" id="rememberMe">
+        <label for="rememberMe">Remember me</label>
+      </div>
+      <button type="submit" id="signInButton">로그인</button>
+    </form>
+    <div class="signup-link">
+      <p>아직 Warranty Tracker 회원이 아니신가요? <a href="register.html">회원가입</a></p>
+    </div>
+  </div>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-analytics.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBjMwpkT6ErP_kutnyMO025WRzYexE6oSo",
+      authDomain: "convergencesoftwareproject1.firebaseapp.com",
+      databaseURL: "https://convergencesoftwareproject1-default-rtdb.firebaseio.com",
+      projectId: "convergencesoftwareproject1",
+      storageBucket: "convergencesoftwareproject1.appspot.com",
+      messagingSenderId: "95772010681",
+      appId: "1:95772010681:web:e8c8966e4d388486449368",
+      measurementId: "G-WMXWPPVBGW"
+    };
+  
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+
+    document.getElementById('loginForm').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      const auth = getAuth();
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          alert('환영합니다!');
+          console.log('User:', userCredential.user);
+          window.location.href = "mainPage.html";
+        })
+        .catch((error) => {
+          console.error('Error Code:', error.code);
+          console.error('Error Message:', error.message);
+          alert(`이메일 또는 비밀번호를 확인해주세요.`);
+        });
+    });
+  </script>
+</body></html>

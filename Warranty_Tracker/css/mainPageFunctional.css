@@ -1,0 +1,93 @@
+.header-buttons {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 1000;
+}
+  
+.navigate-button {
+    background-color: #58404E;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+  
+.navigate-button:hover {
+    background-color: #762052;
+}
+  
+.fc .fc-button {
+    background-color: #58404E !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 5px !important;
+    padding: 5px 10px !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
+}
+  
+.fc .fc-button:hover {
+    background-color: #762052 !important;
+    color: white !important;
+    transition: background-color 0.3s !important;
+}
+  
+.fc .fc-button-active {
+    background-color: #84587175 !important;
+    color: white !important;
+}
+  
+.fc .fc-button-group .fc-button {
+    margin-right: 5px !important;
+}
+  
+.fc .fc-day-today {
+    background-color: #84587175 !important;
+}
+  
+.fc .fc-day-today .fc-daygrid-day-number {
+    color: white !important;
+}
+  
+#toastContainer {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+}
+  
+.toast {
+    background-color: #84587175;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    display: inline-block;
+    animation: fadeOut 5s ease-in-out forwards;
+}
+  
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}  

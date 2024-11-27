@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>메인 페이지</title>
+  <link rel="stylesheet" href="./css/mainPage.css">
+  <link rel="stylesheet" href="./css/mainPageFunctional.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar/main.min.css">
+  <link rel="stylesheet" href="./css/toast.css">
+</head>
+<body>
+  <!-- 우측 상단 버튼 -->
+  <div class="header-buttons">
+    <button id="homeButton" class="navigate-button">Home</button>
+    <button id="addButton" class="navigate-button">Add</button>
+    <button id="listButton" class="navigate-button">List</button>
+  </div>
+
+  <div class="container">
+    <!-- 왼쪽: 시계와 달력 -->
+    <div class="left-container">
+      <!-- 현재 날짜와 시간 표시 -->
+      <div class="clock-container">
+        <h2 id="date"></h2>
+        <h2 id="time"></h2>
+      </div>
+      <div class="calendar-container">
+        <div id="calendar"></div>
+      </div>
+    </div>
+
+    <!-- 오른쪽: 제품 리스트 -->
+    <div class="product-list-container">
+      <h3>제품 리스트</h3>
+      <ul id="productList"></ul>
+    </div>
+  </div>
+
+  <!-- 토스트 메시지 컨테이너 -->
+  <div id="toast" class="toast"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar/main.min.js"></script>
+  <script type="module" src="./js/mainPage.js"></script>
+  <script type="module" src="./js/checkExpiry.js"></script>
+</body>
+</html>

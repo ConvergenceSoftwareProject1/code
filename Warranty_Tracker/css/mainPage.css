@@ -1,0 +1,83 @@
+/* 기본적인 스타일 설정 */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  width: 80%;
+  max-width: 1200px;
+}
+
+.left-container {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.clock-container {
+  text-align: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+}
+
+.calendar-container {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.product-list-container {
+  flex: 1;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  overflow-y: auto;
+}
+
+.product-list-container h3 {
+  margin-bottom: 10px;
+  font-size: 20px;
+  color: #333;
+}
+
+#productList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#productList li {
+  margin: 5px 0;
+  padding: 10px;
+  background-color: #84587175;
+  border-radius: 5px;
+  font-size: 14px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#date {
+  font-size: 24px;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+#time {
+  font-size: 36px;
+  color: #58404E;
+}

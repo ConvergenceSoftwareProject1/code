@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>제품 상세 정보</title>
+  <link rel="stylesheet" href="./css/dataShow.css">
+  <link rel="stylesheet" href="./css/dataShowFunctional.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar/main.min.css">
+</head>
+<body>
+  <div class="container">
+    <h2>제품 상세 정보</h2>
+
+    <div class="product-details">
+      <div class="product-photo">
+        <img id="productImage" src="" alt="제품 이미지">
+      </div>
+
+      <div class="product-info">
+        <h3 id="productName"></h3>
+        <div class="label">모델명</div>
+        <div class="value" id="modelName"></div>
+        <div class="label">시리얼 번호</div>
+        <div class="value" id="serialNumber"></div>
+      </div>
+    </div>
+
+    <div class="bottom-section">
+      <div class="info">
+        <div class="label">구매일</div>
+        <div class="value" id="purchaseDate"></div>
+      </div>
+      <div class="info">
+        <div class="label">만료일</div>
+        <div class="value" id="expiryDate"></div>
+      </div>
+      <div class="info">
+        <div class="label">제조사</div>
+        <div class="value" id="brand"></div>
+      </div>
+      <div class="info">
+        <div class="label">첨부 파일</div>
+        <div class="value" id="receiptImage">
+          <a id="receiptLink" href="" target="_blank">보기</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="button-container">
+      <button id="editButton">수정</button>
+      <button id="uploadButton">파일 업로드</button>
+      <button id="deleteButton">삭제</button>
+      <input type="file" id="fileInput" style="display: none;">
+    </div>
+
+    <div class="calendar-section">
+      <div id="calendar"></div>
+    </div>
+
+    <a href="dataList.html" class="back-button">뒤로 가기</a>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar/main.min.js"></script>
+  <script type="module" src="./js/dataShow.js"></script>
+</body>
+</html>

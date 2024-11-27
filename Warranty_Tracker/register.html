@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원가입 - Warranty Tracker</title>
+  <link rel="stylesheet" href="./css/register_styles.css">
+</head>
+<body>
+  
+  <nav class="top-nav">
+    <div class="nav-logo">
+      <a href="index.html">Warranty Tracker</a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="register.html">회원가입</a></li>
+      <li><a href="index.html">로그인</a></li>
+    </ul>
+  </nav>
+  
+  <div class="register-container">
+    <h1>Register</h1>
+    <p>Warranty Tracker 멤버 ID를 생성하세요.<br>등록을 완료하고 편리한 삶을 시작하세요.</p>
+    <form id="registerForm">
+      <input type="email" id="email" placeholder="Email address" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit" id="signUpButton">Get Started</button>
+    </form>
+  </div>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-analytics.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBjMwpkT6ErP_kutnyMO025WRzYexE6oSo",
+      authDomain: "convergencesoftwareproject1.firebaseapp.com",
+      databaseURL: "https://convergencesoftwareproject1-default-rtdb.firebaseio.com",
+      projectId: "convergencesoftwareproject1",
+      storageBucket: "convergencesoftwareproject1.appspot.com",
+      messagingSenderId: "95772010681",
+      appId: "1:95772010681:web:e8c8966e4d388486449368",
+      measurementId: "G-WMXWPPVBGW"
+    };
+  
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+
+    document.getElementById('registerForm').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      const auth = getAuth();
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          console.log('User created:', userCredential);
+          alert('회원가입 성공!');
+        })
+        .catch((error) => {
+          console.error('Error Code:', error.code);
+          console.error('Error Message:', error.message);
+          alert(`이미 가입된 이메일이거나 옳바른 이메일이 아닙니다`);
+        });
+    });
+
+  </script>
+</body>
+</html>

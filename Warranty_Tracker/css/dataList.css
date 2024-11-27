@@ -1,0 +1,61 @@
+/* 기본적인 스타일 설정 */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.search-bar {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.product-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.product-name {
+  font-weight: bold;
+  color: black;
+}
+
+.expiry-date {
+  color: #58404E;
+}
+
+.warranty-status {
+  font-weight: bold;
+  color: #555;
+}
+
+.in-warranty {
+  color: #666;
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>제품 정보 입력</title>
+  <link rel="stylesheet" href="./css/dataInput.css">
+  <link rel="stylesheet" href="./css/dataInputFunctional.css">
+</head>
+<body>
+  <!-- 우측 상단 버튼 -->
+  <div class="header-buttons">
+    <button id="homeButton" class="navigate-button">Home</button>
+    <button id="addButton" class="navigate-button">Add</button>
+    <button id="listButton" class="navigate-button">List</button>
+  </div>
+
+  <!-- 제품 정보를 입력하는 폼 -->
+  <form id="productForm">
+    <h2>제품 정보 입력</h2>
+
+    <!-- 제품명 입력 필드 -->
+    <input type="text" id="productName" name="productName" placeholder="제품명">
+    <div id="productNameError" class="error"></div>
+
+    <!-- 제조사 입력 필드 -->
+    <input type="text" id="brand" name="brand" placeholder="제조사">
+    <div id="brandError" class="error"></div>
+
+    <!-- 모델명 입력 필드 -->
+    <input type="text" id="modelName" name="modelName" placeholder="모델명">
+    <div id="modelNameError" class="error"></div>
+
+    <!-- 시리얼 번호 입력 필드 -->
+    <input type="text" id="serialNumber" name="serialNumber" placeholder="시리얼 번호">
+    <div id="serialNumberError" class="error"></div>
+
+    <!-- 구매일 입력 필드 -->
+    <label for="purchaseDate">구매일</label>
+    <input type="date" id="purchaseDate" name="purchaseDate">
+    <div id="purchaseDateError" class="error"></div>
+    
+    <!-- 만료일 입력 필드 -->
+    <label for="expiryDate">만료일</label>
+    <input type="date" id="expiryDate" name="expiryDate">
+    <div id="expiryDateError" class="error"></div>
+
+    <!-- 알림 설정 선택박스 -->
+    <label for="notificationTime">알림 설정</label>
+    <select id="notificationTime" name="notificationTime">
+      <option value="1month">만료일 1달 전</option>
+      <option value="1week">만료일 1주일 전</option>
+      <option value="1day">만료일 1일 전</option>
+      <option value="custom">사용자 지정</option>
+      <option value="none">알림 없음</option>
+    </select>
+
+    <!-- 사용자 지정 알림 설정 -->
+    <div id="customNotificationContainer">
+      <label for="customNotificationDays">상세 알림 일정 설정</label>
+      <input type="number" id="customNotificationDays" name="customNotificationDays" min="1" placeholder="일수 입력">
+      <div id="customNotificationDaysError" class="error"></div>
+    </div>
+
+    <!-- 영수증 및 보증서 업로드 필드 -->
+    <div class="upload-container" id="receiptImageContainer">
+      <div class="image-preview-container">
+        <img id="receiptImagePreview" src="" alt="미리보기 이미지" style="display:none;">
+      </div>
+      <span class="upload-text" id="receiptImageUploadText">영수증 및 보증서 업로드</span>
+      <input type="file" id="receiptImageInput" name="receiptImage" accept="image/*">
+    </div>
+    
+    <!-- 제품 사진 업로드 필드 -->
+    <div class="upload-container" id="productImageContainer">
+      <div class="image-preview-container">
+          <img id="productImagePreview" src="" alt="미리보기 이미지" style="display:none;">
+      </div>
+      <span class="upload-text" id="productImageUploadText">제품 이미지 업로드</span>
+      <input type="file" id="productImageInput" name="productImage" accept="image/*">
+    </div>
+
+    <!-- 버튼 컨테이너 -->
+    <div class="button-container">
+      <button type="submit">저장</button>
+      <button type="button" id="cancelButton">취소</button>
+    </div>
+  </form>
+
+  <!-- 저장 완료 후 표시되는 알림창 -->
+  <div id="customAlert">저장되었습니다</div>
+
+  <!-- Firebase 및 로직을 위한 JS 파일 로드 -->
+  <script type="module" src="./js/dataInput.js"></script>
+</body>
+</html>

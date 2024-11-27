@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>제품 목록</title>
+  <link rel="stylesheet" href="./css/dataList.css">
+  <link rel="stylesheet" href="./css/dataListFunctional.css">
+</head>
+<body>
+  <!-- 우측 상단 버튼 -->
+  <div class="header-buttons">
+    <button id="homeButton" class="navigate-button">Home</button>
+    <button id="addButton" class="navigate-button">Add</button>
+    <button id="listButton" class="navigate-button">List</button>
+  </div>
+
+  <h2>제품 목록</h2>
+
+  <!-- 검색바 -->
+  <div class="search-container">
+    <input type="text" id="searchBar" class="search-bar" placeholder="제품명, 모델명, 시리얼 번호, 제조사 검색...">
+  </div>
+
+  <!-- 개수 표시 부분 -->
+  <div class="header-info-container">
+    <div id="totalCount" class="header-info" data-status="all">전체 항목 개수: 0</div>
+    <div id="inWarrantyCount" class="header-info" data-status="inWarranty">In warranty 개수: 0</div>
+    <div id="expiredCount" class="header-info" data-status="expired">보증 기간 만료 개수: 0</div>
+  </div>
+
+  <!-- 제품 리스트 -->
+  <div class="product-list" id="productList"></div>
+
+  <script type="module" src="./js/dataList.js"></script>
+</body>
+</html>
