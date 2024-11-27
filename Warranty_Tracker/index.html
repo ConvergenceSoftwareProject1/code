@@ -1,9 +1,12 @@
-<!DOCTYPE html><html lang="ko"><head>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Warranty Tracker - Login</title>
-  <link rel="stylesheet" href="./css/login_styles.css"></head><body>
-
+  <link rel="stylesheet" href="./css/login_styles.css">
+</head>
+<body>
   <!-- Top Navigation Bar -->
   <nav class="top-nav">
     <div class="nav-logo">
@@ -31,6 +34,7 @@
       <p>아직 Warranty Tracker 회원이 아니신가요? <a href="register.html">회원가입</a></p>
     </div>
   </div>
+
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-analytics.js";
@@ -45,29 +49,54 @@
       appId: "1:95772010681:web:e8c8966e4d388486449368",
       measurementId: "G-WMXWPPVBGW"
     };
-  
+
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
 
     import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 
-    document.getElementById('loginForm').addEventListener('submit', (event) => {
+    // 페이지 로드 시 이메일 복원
+    document.addEventListener("DOMContentLoaded", () => {
+      const savedEmail = localStorage.getItem("savedEmail");
+      const rememberMe = localStorage.getItem("rememberMe") === "true";
+
+      if (savedEmail) {
+        document.getElementById("email").value = savedEmail;
+      }
+
+      document.getElementById("rememberMe").checked = rememberMe;
+    });
+
+    // 로그인 로직
+    document.getElementById("loginForm").addEventListener("submit", (event) => {
       event.preventDefault();
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
+
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const rememberMe = document.getElementById("rememberMe").checked;
+
+      // Remember Me 설정 저장
+      if (rememberMe) {
+        localStorage.setItem("savedEmail", email);
+        localStorage.setItem("rememberMe", "true");
+      } else {
+        localStorage.removeItem("savedEmail");
+        localStorage.removeItem("rememberMe");
+      }
 
       const auth = getAuth();
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-          alert('환영합니다!');
-          console.log('User:', userCredential.user);
+          alert("환영합니다!");
+          console.log("User:", userCredential.user);
           window.location.href = "mainPage.html";
         })
         .catch((error) => {
-          console.error('Error Code:', error.code);
-          console.error('Error Message:', error.message);
-          alert(`이메일 또는 비밀번호를 확인해주세요.`);
+          console.error("Error Code:", error.code);
+          console.error("Error Message:", error.message);
+          alert("이메일 또는 비밀번호를 확인해주세요.");
         });
     });
   </script>
-</body></html>
+</body>
+</html>
